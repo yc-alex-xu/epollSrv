@@ -1,12 +1,16 @@
 epollSrv: a echo server using epoll interface
 
 # test 
-$ nc 127.0.0.1  8000
+```bash
+$telnet 127.0.0.1  8000
 Trying 127.0.0.1...
 Connected to 127.0.0.1.
+```
+note:
 
-ctrl+]: enter telnet cmd mode
-
+* ctrl+]: enter telnet cmd mode
+* try nc instead of telnet 
+  
 # TODO
 增加对ctrl-c的处理，close epoll fd
 
@@ -20,19 +24,19 @@ epoll的接口非常简单，一共就三个函数：
 2. int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
 操作的类型，具体包含
 ```
-		EPOLL_CTL_ADD
-					Register the target file descriptor fd on the epoll instance
-					referred to by the file descriptor epfd and associate the
-					event event with the internal file linked to fd.
+EPOLL_CTL_ADD
+			Register the target file descriptor fd on the epoll instance
+			referred to by the file descriptor epfd and associate the
+			event event with the internal file linked to fd.
 
-		EPOLL_CTL_MOD
-					Change the event event associated with the target file
-					descriptor fd.
+EPOLL_CTL_MOD
+			Change the event event associated with the target file
+			descriptor fd.
 
-		EPOLL_CTL_DEL
-					Remove (deregister) the target file descriptor fd from the
-					epoll instance referred to by epfd.  The event is ignored and
-              can be NULL (but see BUGS below).
+EPOLL_CTL_DEL
+			Remove (deregister) the target file descriptor fd from the
+			epoll instance referred to by epfd.  The event is ignored and
+					can be NULL (but see BUGS below).
 
 events成员变量：
 		可以是以下几个宏的集合：
